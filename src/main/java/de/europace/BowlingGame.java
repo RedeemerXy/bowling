@@ -6,7 +6,11 @@ public class BowlingGame {
     private Frame last = null;
 
     public void roll(int first, int second) {
-        addFrame(new Frame(first, second));
+        roll(first, second, 0);
+    }
+
+    public void roll(int first, int second, int third) {
+        addFrame(new Frame(first, second, third));
     }
 
     private void addFrame(Frame frame) {

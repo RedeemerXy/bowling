@@ -49,4 +49,29 @@ class FrameTest {
         next.setNext(new Frame(3, 4));
         assertEquals(23, frame.calculateScore());
     }
+
+    @Test
+    void lastFrameSpare() {
+        assertEquals(12, new Frame(3, 7, 2).calculateScore());
+        assertEquals(20, new Frame(3, 7, 10).calculateScore());
+    }
+
+    @Test
+    void lastFrameStrike() {
+        assertEquals(16, new Frame(10, 3, 3).calculateScore());
+        assertEquals(20, new Frame(10, 3, 7).calculateScore());
+        assertEquals(20, new Frame(10, 10, 0).calculateScore());
+        assertEquals(24, new Frame(10, 10, 4).calculateScore());
+        assertEquals(30, new Frame(10, 10, 10).calculateScore());
+    }
+
+    @Test
+    void lastTwoFrames() {
+        Frame frame = new Frame(10, 0);
+        assertEquals(10, frame.calculateScore());
+        Frame next = new Frame(10, 10, 10);
+        frame.setNext(next);
+        assertEquals(30, frame.calculateScore());
+    }
+    
 }

@@ -10,8 +10,14 @@ public class Frame {
 
     private final int firstRoll;
     private final int secondRoll;
+    // potential bonus roll on last frame
+    private final int thirdRoll;
     @Setter
     private Frame next;
+
+    public Frame(int firstRoll, int secondRoll) {
+        this(firstRoll, secondRoll, 0);
+    }
 
     public boolean isStrike() {
         return firstRoll == 10;
@@ -22,7 +28,7 @@ public class Frame {
     }
 
     public int calculateScore() {
-        int frameScore = firstRoll + secondRoll;
+        int frameScore = firstRoll + secondRoll + thirdRoll;
 
         if (next == null) {
             return frameScore;
