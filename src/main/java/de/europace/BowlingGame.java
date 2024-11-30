@@ -37,7 +37,18 @@ public class BowlingGame {
         int sum = 0;
         for (Frame frame : frames) {
             sum += frame.getFrameScore();
+            printFrame(frame, sum);
         }
         return sum;
+    }
+
+    private void printFrame(Frame frame, int sum) {
+        StringBuilder sB = new StringBuilder();
+        sB.append(String.format("%02d", frame.getFirstRoll()));
+        sB.append(" | ");
+        sB.append(String.format("%02d", frame.getSecondRoll()));
+        sB.append(" | ");
+        sB.append(String.format("%03d", sum));
+        System.out.println(sB);
     }
 }
