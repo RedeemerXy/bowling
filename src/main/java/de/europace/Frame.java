@@ -10,9 +10,8 @@ public class Frame {
 
     private final int firstRoll;
     private final int secondRoll;
-    // sum of rolls plus bonuses
     @Setter
-    private int frameScore;
+    private Frame next;
 
     public boolean isStrike() {
         return firstRoll == 10;
@@ -22,13 +21,28 @@ public class Frame {
         return !isStrike() && firstRoll + secondRoll == 10;
     }
 
-//    public void calculateScore(int nextRoll, int secondNextRoll) {
-//        frameScore = firstRoll + secondRoll;
-//        if (isStrike()) {
-//            frameScore += nextRoll + secondNextRoll;
-//        } else if (isSpare()) {
-//            frameScore += nextRoll;
-//        }
-//    }
+    public int calculateScore() {
+        int frameScore = firstRoll + secondRoll;
+
+        if (next == null) {
+            return frameScore;
+        }
+
+        if (isSpare() || isStrike()) {
+            frameScore += next.getFirstRoll();
+        }
+
+        if (isStrike()) {
+            if (!next.isStrike()) {
+                frameScore += next.getSecondRoll();
+            } else {
+                Frame secondNext = next.getNext();
+                if (secondNext != null) {
+                    frameScore += secondNext.getFirstRoll();
+                }
+            }
+        }
+        return frameScore;
+    }
 
 }
